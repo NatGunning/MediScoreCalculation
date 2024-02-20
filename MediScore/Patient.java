@@ -75,10 +75,16 @@ public class Patient {
             }
         }
 
+        public float configTemp()
+        {
+            DecimalFormat oneDP = new DecimalFormat("#.#");
+            this.temp = Float.parseFloat(oneDP.format(this.temp));
+            return this.temp;
+        }
+
     public int getTempScore()
     {
-        DecimalFormat oneDP = new DecimalFormat("#.#");
-        this.temp = Float.parseFloat(oneDP.format(this.temp));
+        configTemp();
         if (this.temp <= 35.0)
         {
             return 3;
@@ -108,7 +114,7 @@ public class Patient {
                 + String.format("%-20s %-20s %-5s","Consciousness" , this.consciousnessState , this.getConsciousnessStateScore())+"\n"
                 + String.format("%-20s %-20s %-5s","Respiration Range" , this.respRange , this.getRespRangeScore())+"\n"
                 + String.format("%-20s %-20s %-5s","SpO2" , this.sp02 , this.getSp02Score())+"\n"
-                + String.format("%-20s %-20s %-5s","Temperature" , this.temp , this.getTempScore())+"\n"
+                + String.format("%-20s %-20s %-5s","Temperature" , configTemp(), this.getTempScore())+"\n"
                 + "This patient's final Medi score is: " + getMediScore()+"\n";
     }
 }
